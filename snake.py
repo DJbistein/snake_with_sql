@@ -9,6 +9,7 @@ import pygame
 import random
 import time
 import pymssql
+import getscore
 
 server = "192.168.15.15\\IT22"
 login = "sa"
@@ -40,6 +41,8 @@ CELL_NUMBER = 15
 
 HEIGHT = CELL_SIZE * CELL_NUMBER
 WIDTH = CELL_SIZE * CELL_NUMBER
+
+highscore = getscore.get_highscore()
 
 fps = 60
 colck = pygame.time.Clock()
@@ -115,9 +118,9 @@ def draw_score(tall):
     label = myFont.render(f"score: {tall}", 1, BLACK)
     screen.blit(label, (20, 20))
 
-def draw_highscore(tall):
+def draw_highscore():
     myFont = pygame.font.SysFont("monospace", 18)
-    label = myFont.render(f"HighScore: {tall}", 1, BLACK)
+    label = myFont.render(f"HighScore: {highscore}", 1, BLACK)
     screen.blit(label, (WIDTH - 200, HEIGHT - 50))
 
 
@@ -151,7 +154,7 @@ def update():
     snake.move()
     apple.draw()
     draw_score(snake.score)
-    draw_highscore(snake.score)
+    draw_highscore()
     collide()
     pygame.display.update()
 

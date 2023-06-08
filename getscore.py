@@ -11,9 +11,12 @@ def get_highscore():
     score = conn.cursor(as_dict = True)
     score.execute(sqlline)
 
+    highscore = 0 
     for s in score:
-        print(s)
+        if s["score"] > highscore:
+            highscore =s["score"]
 
     conn.close()
+    
+    return highscore
 
-get_highscore()
